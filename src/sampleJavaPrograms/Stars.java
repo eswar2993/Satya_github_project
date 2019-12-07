@@ -15,4 +15,14 @@ public class Stars {
 			System.out.println();
 		}	
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
