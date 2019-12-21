@@ -1,4 +1,4 @@
-package Project1;
+package sampleJavaPrograms;
 
 public class HelloWorld {
 
