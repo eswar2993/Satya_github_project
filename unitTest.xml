@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Execution of Unit Test Cases">
+  <test name="Validation of Unit Test Cases">
+    <classes>
+      <class name="com.src.jenkins.unitTestCases"/>
+    </classes>
+  </test> 
+</suite>
