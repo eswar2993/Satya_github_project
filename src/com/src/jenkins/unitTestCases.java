@@ -48,7 +48,7 @@ public class unitTestCases {
 	
 	@Test
 	public void assertion(){
-		Assert.assertEquals("Equals", "Equal");
+		Assert.assertEquals("Equals", "Equals");
 	}
 	
 	
