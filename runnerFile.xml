@@ -4,7 +4,7 @@
 <test name="Broken Links Validations">
 <parameter name="browser" value="chrome"></parameter>
 <classes>
-<class name="com.src.jenkins.findBrokenLinks"></class>
+<class name="com.src.jenkins.dataProvider"></class>
 </classes>
 </test>
 </suite>
