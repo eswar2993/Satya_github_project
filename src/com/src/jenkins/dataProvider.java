@@ -1,7 +1,15 @@
 package com.src.jenkins;
 
+import java.awt.TrayIcon.MessageType;
+import java.io.IOException;
+
+import org.openqa.selenium.By;
+import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import org.testng.internal.TestResult;
 
 public class dataProvider {
 
@@ -35,5 +43,26 @@ public class dataProvider {
 		System.out.println("");
 		
 	}
+	
+	
+	@DataProvider(parallel=true)
+	public Object [][] seachKeywords(){
+		return new Object[][] {{"firstKeyword"},{"secondKeyword"}, {"thirdKeyword"}};
+	}
+	
+
+	@Test(dataProvider="seachKeywords")
+	public void multipeRuns(String value) throws IOException{
+		
+		findBrokenLinks links = new findBrokenLinks();
+		links.setUp("chrome");
+		
+		links.driver.findElement(By.xpath("//input[@title='Search']")).sendKeys(value);
+	}
+	
+	
+	
+	
+	
 	
 }

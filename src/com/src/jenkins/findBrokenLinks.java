@@ -1,5 +1,7 @@
 package com.src.jenkins;
 
+
+import java.awt.TrayIcon.MessageType;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -8,55 +10,57 @@ import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import javax.net.ssl.SSLEngineResult.Status;
+
+import org.junit.internal.runners.statements.Fail;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Reporter;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import org.testng.internal.TestResult;
 
 public class findBrokenLinks {
-	
-	static WebDriver driver;
+		
+	WebDriver driver=null;
 	Properties properties;
-	
-	
+	public static String URL = "url";
+
 	//Static variables
 	public static String chromePath = "chromePath";
-	public static String URL = "url";
-	
-	
-	@BeforeTest
-	public void loadProperties() throws IOException{
-		
+	public static String MozillaPath = "mozillaPath";
+
+	@Parameters({"browser"})
+	@BeforeClass
+	public void setUp(String browserName)throws IOException{
 		String filePath = System.getProperty("user.dir")+"\\applicationProperties.properties";
 		FileInputStream file = new FileInputStream(filePath);
 		properties = new Properties();
 		properties.load(file);
 		
-	}
-
-	@Parameters({"browser"})
-	@BeforeTest
-	public void setUp(String browserName){
 		if(browserName.equalsIgnoreCase("Chrome")){
 			System.setProperty("webdriver.chrome.driver", properties.getProperty(chromePath));
 			driver = new ChromeDriver();
+		}else{
+			System.setProperty("webdriver.gecko.driver", properties.getProperty(MozillaPath));
+			driver = new FirefoxDriver();
 		}
 		
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.get(properties.getProperty(URL));
+		
 	}
 	
 	
 	@Test()
 	public void validateBrokenLinks() throws IOException{
-		
 		driver.findElement(By.xpath("//input[@title='Search']")).sendKeys("hi");
 		
 		List<WebElement> elements = driver.findElements(By.tagName("a"));
@@ -73,13 +77,11 @@ public class findBrokenLinks {
 			else if(String.valueOf(responseCode).startsWith("4") || String.valueOf(responseCode).startsWith("5"))
 				Reporter.log("Link "+element+" is a broken link");
 		}
-		
 	}
 	
-	
-	@AfterTest()
+	@AfterClass()
 	public void closeSession(){
-		driver.close();
+		driver.quit();
 	}
 	
 

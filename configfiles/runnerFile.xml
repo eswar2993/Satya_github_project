@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Broken Links validation" parallel ="tests" thread-count="2">
+
+<test name="Broken Links Validations in Mozilla">
+<parameter name="browser" value="mozilla"></parameter>
+<classes>
+<class name="com.src.jenkins.findBrokenLinks"></class>
+</classes>
+</test>
+
+<test name="Broken Links Validations in Chrome">
+<parameter name="browser" value="chrome"></parameter>
+<classes>
+<class name="com.src.jenkins.findBrokenLinks"></class>
+</classes>
+</test>
+
+
+
+</suite>
