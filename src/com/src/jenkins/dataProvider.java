@@ -15,14 +15,14 @@ import org.testng.internal.TestResult;
 
 public class dataProvider {
 
-	@Test(dataProvider="values", enabled=false)
+	@Test(dataProvider="values", enabled=false, groups="", dependsOnMethods="", dependsOnGroups="", invocationCount=10,invocationTimeOut=20)
 	public void getDataProviderValues(String firstValue, String secondValue){
 		System.out.println(firstValue);
 		System.out.println(secondValue);
 	}
 	
 	//data provider which is in the same class
-	@DataProvider(name ="values")
+	@DataProvider(name ="values", parallel=true)
 	public Object[][] valuesList(){
 		
 		Object data[][] = new Object[2][2];
