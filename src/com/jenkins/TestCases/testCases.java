@@ -3,6 +3,8 @@ package com.jenkins.TestCases;
 import java.io.IOException;
 
 import org.apache.http.client.ClientProtocolException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
 
@@ -27,8 +29,30 @@ public class testCases extends RestClient{
 		Reporter.log("Current Headers: "+headerValues);
 		
 	}
-	
-	
+	@Test
+	public void json(){
+		JSONObject object = new JSONObject();
+		object.put("Name", "Satya");
+		
+		JSONObject details = new JSONObject();
+		details.put("Phone", "Iphone");
+		details.put("Age", "28");
+		details.put("Org", "Infy");
+		
+		JSONArray arrayValues = new JSONArray();
+		
+		arrayValues.put(0, details);
+		
+		details = new JSONObject();
+		details.put("Phone", "Andriod");
+		details.put("Age", "28");
+		details.put("Org", "Infy");
+		arrayValues.put(1, details);
+		
+		object.put("details",arrayValues);
+		
+		System.out.println(object);
+	}
 	
 
 }

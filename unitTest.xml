@@ -3,7 +3,11 @@
 <suite name="Execution of API Test Cases">
   <test name="Validation of API Test Cases">
     <classes>
-      <class name="com.jenkins.TestCases.testCases"/>
+      <class name="com.jenkins.TestCases.testCases">
+      <methods>
+      <include name ="json"/>
+      </methods>
+      </class>
     </classes>
   </test> 
 </suite>
