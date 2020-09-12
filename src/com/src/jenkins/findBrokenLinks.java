@@ -1,7 +1,11 @@
 package com.src.jenkins;
 
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.TrayIcon.MessageType;
+import java.awt.datatransfer.Clipboard;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -10,6 +14,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import javax.net.ssl.SSLEngineResult.Status;
 
@@ -86,7 +91,8 @@ public class findBrokenLinks {
 			else if(String.valueOf(responseCode).startsWith("4") || String.valueOf(responseCode).startsWith("5"))
 				Reporter.log("Link "+element+" is a broken link");
 		}
-	}
+		
+	}	
 	
 	@AfterClass()
 	public void closeSession(){
