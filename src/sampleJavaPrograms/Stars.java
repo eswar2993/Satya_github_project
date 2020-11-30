@@ -7,7 +7,6 @@ public class Stars {
 		stars(5);
 	}
 	
-
 	public static void stars(int count){
 		for(int i=1;i<=count;i++){
 			for(int j=0;j<i;j++){
